@@ -268,9 +268,9 @@ def chkpt_contains_arg(ckpt_path: str, arg_name: str):
 
 def prepend_paths(hparams):
   db = hparams.data_base
-  
+
   for hp in [
-    'labels_train', 'labels_val', 
+    'labels_train', 'labels_val', 'columns_name',
     'data_train_imaging', 'data_val_imaging', 
     'data_val_eval_imaging', 'labels_val_eval_imaging', 
     'data_train_eval_imaging', 'labels_train_eval_imaging',
@@ -291,7 +291,7 @@ def re_prepend_paths(hparams):
   db = hparams.data_base
   
   for hp in [
-    'labels_train', 'labels_val', 
+    'labels_train', 'labels_val', 'columns_name',
     'data_train_imaging', 'data_val_imaging', 
     'data_val_eval_imaging', 'labels_val_eval_imaging', 
     'data_train_eval_imaging', 'labels_train_eval_imaging',

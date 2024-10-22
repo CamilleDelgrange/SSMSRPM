@@ -15,20 +15,14 @@ seeds:
   - 2024
   - 2025
   - 2026
-lr_finder_lrs: 
-  - 3.e-2
-  - 1.e-2
-  - 3.e-3
-  - 1.e-3
-  - 3.e-4
-  - 1.e-4
-multitarget:
 
 wandb_entity: #PUT HERE YOUR WANDB ENTITY
 data_base: #PUT HERE YOUR DATABASE FOLDER 
 num_workers: 4
 
 wandb_project: #PUT HERE YOUR WANDB PROJECT NAME
+
+algorithm_name: SSMSRPM
 
 # Multimodal
 lr: 1.e-4
@@ -39,7 +33,7 @@ warmup_epochs: 10
 temperature: 0.15
 projection_dim: 128
 use_projection_head: True
-strategy: 
+strategy: ssmsrpm
 
 loss: clip
 hard_neg: False
@@ -47,8 +41,6 @@ view: augmented
 lambda_0: 0.5
 momentum: 0.99
 
-train_similarity_matrix:
-val_similarity_matrix: 
 threshold: 0.9
 similarity_divisor: 2
 
@@ -59,8 +51,8 @@ pretrained_imaging_strategy: trainable
 
 multiple_lr: False
 
-batch_size: 6 #512
-lr_eval: 1e-5 #scaled by gradient acc
+batch_size: 6 
+lr_eval: 1e-5 #scaled by gradient accumulation
 weight_decay_eval: 1e-3
 val_check_interval: 1.0 
 check_val_every_n_epoch: 1 
@@ -97,9 +89,6 @@ youden_index: False
 youden_index_eval: True
 gradcam: True
 
-vec2vec: False
-checkpoint_vec2vec: 
-
 # PUT here the pretrained checkpoint of the best pretrained multimodal model:
 checkpoint: PATH_TO_REPO/runs/multimodal/gentle-sound-239/last.ckpt
 checkpoint_imaging: False
@@ -126,7 +115,5 @@ evaluate: True
 test: False
 test_and_eval: True
 combine_train_and_val: False
-weighted_sampler: False
 stratified_sampler: True
 classifier_freq: 1
-unit_test: False

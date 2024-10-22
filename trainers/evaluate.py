@@ -13,7 +13,6 @@ from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint, LearningRateMonitor
-from torch.utils.data.sampler import WeightedRandomSampler
 from torch.utils.data.sampler import Sampler
 import psutil
 from datasets.ImagingAndTabularDatasetEval import ImagingAndTabularDatasetEval

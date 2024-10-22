@@ -127,20 +127,20 @@ class Evaluator(pl.LightningModule):
     if self.hparams.eval_datatype == 'imaging':
       self.model = ImagingModel(self.hparams)
     elif self.hparams.eval_datatype == 'tabular':
-      if self.hparams.algorithm_name == 'SSMSRPM':
-        if self.hparams.strategy == 'ssmsrpm':
+      if self.hparams.algorithm_name == 'TIP':
+        if self.hparams.strategy == 'tip':
           self.model = TabularModelTransformer(self.hparams)
       else:
         self.model = TabularModel(self.hparams)
     elif self.hparams.eval_datatype == 'imaging_and_tabular':
-      if self.hparams.algorithm_name == 'ITM':
-        assert self.hparams.strategy == 'itm'
+      if self.hparams.algorithm_name == 'SSMSRPM':
+        assert self.hparams.strategy == 'ssmsrpm'
         if self.hparams.finetune_ensemble == True:
           self.model = BackboneEnsemble(self.hparams)
       elif self.hparams.algorithm_name == 'DAFT':
         self.model = DAFT(self.hparams)
       elif self.hparams.algorithm_name in set(['CONCAT']):
-        if self.hparams.strategy == 'ssmsrpm':
+        if self.hparams.strategy == 'tip':
           self.model = MultimodalModelTransformer(self.hparams)
       elif self.hparams.algorithm_name == 'EVAL_PRETRAIN':
         # use MLP-based tabular encoder
@@ -728,10 +728,7 @@ class Evaluator(pl.LightningModule):
       all_targets = torch.cat(self.val_targets)
       self.compute_youden_index(all_preds, all_targets)
 
-    if self.hparams.target == 'dvm':
-      self.best_val_score = max(self.best_val_score, epoch_acc_val)
-    else:
-      self.best_val_score = max(self.best_val_score, epoch_auc_val)
+    self.best_val_score = max(self.best_val_score, epoch_auc_val)
     self.log("eval.val.best_auc", self.best_val_score, on_epoch=True)
 
     self.auc_val.reset()

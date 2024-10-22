@@ -7,7 +7,7 @@ defaults:
 pretrain: True
 run_eval: False
 
-algorithm_name:
+algorithm_name: SSMSRPM
 
 seeds: 
   - 2022
@@ -15,14 +15,6 @@ seeds:
   - 2024
   - 2025
   - 2026
-lr_finder_lrs: 
-  - 3.e-2
-  - 1.e-2
-  - 3.e-3
-  - 1.e-3
-  - 3.e-4
-  - 1.e-4
-multitarget:
 
 wandb_entity: #PUT HERE YOUR WANDB ENTITY
 data_base: #PUT HERE YOUR DATABASE FOLDER 
@@ -39,7 +31,7 @@ warmup_epochs: 10
 temperature: 0.08
 projection_dim: 128
 use_projection_head: True
-strategy: 
+strategy: ssmsrpm
 
 loss: clip
 hard_neg: False
@@ -47,8 +39,6 @@ view: augmented
 lambda_0: 0.5
 momentum: 0.99
 
-train_similarity_matrix:
-val_similarity_matrix: 
 threshold: 0.9
 similarity_divisor: 2
 
@@ -96,9 +86,6 @@ optimizer_eval: adamw
 youden_index: False
 youden_index_eval: True
 
-vec2vec: False
-checkpoint_vec2vec: 
-
 checkpoint:
 checkpoint_imaging: False
 checkpoint_tabular: False
@@ -124,6 +111,5 @@ evaluate: True
 test: False
 test_and_eval: True
 combine_train_and_val: False
-weighted_sampler: False
 stratified_sampler: True
 classifier_freq: 1

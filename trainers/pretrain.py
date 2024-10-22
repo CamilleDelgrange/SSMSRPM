@@ -112,17 +112,18 @@ def load_datasets(hparams, device=None, reload=False):
   return train_dataset, val_dataset
 
 
-def select_model(hparams, train_dataset, device=None): 
+def select_model(hparams): 
   if hparams.datatype == 'multimodal':
-    if hparams.strategy == 'itm':
-      # ITM
+    if hparams.strategy == 'ssmsrpm':
+      # SSMSRPM:
       model = Model2Loss(hparams)
       print('Using Model2Loss')
     else:
-      # MMCL
+      # MMCL:
       model = MultimodalSimCLR(hparams) 
   elif hparams.datatype == 'imaging':
     if hparams.loss.lower() == 'barlowtwins':
+      # BARLOW TWINS:
       def filter_hparams(hparams):
         allowed_keys = {"in_channels", "n_blocks", "dropout_rate", "bn_momentum", "n_basefilters", 
                     "resnet_version", "encoder_out_dim", "z_dim", "lambda_coeff", "batch_size", 
