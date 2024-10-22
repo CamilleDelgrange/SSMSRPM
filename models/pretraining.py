@@ -16,7 +16,6 @@ from lightly.models.modules import SimCLRProjectionHead
 from models.ResnetEmbeddingModel import ProjectionHead
 from pl_bolts.optimizers.lr_scheduler import LinearWarmupCosineAnnealingLR
 from models.utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
-from pl_bolts.utils.self_supervised import torchvision_ssl_encoder
 from monai.networks import nets
 from torch import nn
 import torch.nn.functional as F

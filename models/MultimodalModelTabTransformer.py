@@ -10,7 +10,7 @@ from collections import OrderedDict
 
 from models.TabularModel import TabularModel
 from models.ImagingModel import ImagingModel
-from models.Tip_utils.Transformer import TabularTransformerEncoder
+from models.utils.Transformer import TabularTransformerEncoder
 
 class MultimodalModelTransformer(nn.Module):
   """
