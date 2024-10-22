@@ -21,7 +21,7 @@ from models.ImagingModel import ImagingModel
 from models.MultimodalModel import MultimodalModel
 from models.MultimodalModelTabTransformer import MultimodalModelTransformer
 from models.TabularModelTransformer import TabularModelTransformer
-from models.Tip_utils.Tip_downstream_ensemble import TIPBackboneEnsemble
+from models.utils.downstream_ensemble import BackboneEnsemble
 from models.DAFT import DAFT
 import wandb
 import monai
@@ -121,9 +121,8 @@ class Evaluator(pl.LightningModule):
     if self.hparams.eval_datatype == 'imaging':
       self.model = ImagingModel(self.hparams)
     elif self.hparams.eval_datatype == 'tabular':
-      if self.hparams.algorithm_name == 'TIP':
-        # use TIP's tabular encoder
-        if self.hparams.strategy == 'tip':
+      if self.hparams.algorithm_name == 'SSMSRPM':
+        if self.hparams.strategy == 'ssmsrpm':
           self.model = TabularModelTransformer(self.hparams)
       else:
         self.model = TabularModel(self.hparams)
@@ -131,12 +130,11 @@ class Evaluator(pl.LightningModule):
       if self.hparams.algorithm_name == 'ITM':
         assert self.hparams.strategy == 'itm'
         if self.hparams.finetune_ensemble == True:
-          self.model = TIPBackboneEnsemble(self.hparams)
+          self.model = BackboneEnsemble(self.hparams)
       elif self.hparams.algorithm_name == 'DAFT':
         self.model = DAFT(self.hparams)
       elif self.hparams.algorithm_name in set(['CONCAT']):
-        if self.hparams.strategy == 'tip':
-          # use TIP's tabular encoder
+        if self.hparams.strategy == 'ssmsrpm':
           self.model = MultimodalModelTransformer(self.hparams)
       elif self.hparams.algorithm_name == 'EVAL_PRETRAIN':
         # use MLP-based tabular encoder

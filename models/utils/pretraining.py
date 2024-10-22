@@ -23,8 +23,8 @@ CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_PATH = os.path.abspath(os.path.join(CURRENT_PATH, '..'))
 sys.path.append(REPO_PATH)
 
-from models.Tip_utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
-#from models.Tip_utils.VisionTransformer_imagenet import create_vit
+from models.utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
+#from models.utils.VisionTransformer_imagenet import create_vit
 
 class Pretraining(pl.LightningModule):
     

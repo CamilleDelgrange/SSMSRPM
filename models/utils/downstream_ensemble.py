@@ -17,19 +17,19 @@ import torch.nn.functional as F
 from omegaconf import DictConfig, open_dict, OmegaConf
 from monai.networks import nets
 
-from models.Tip_utils.Transformer import MultimodalTransformerEncoder
+from models.utils.Transformer import MultimodalTransformerEncoder
 from utils.pieces import DotDict
-#from models.Tip_utils.VisionTransformer_imagenet import create_vit
+#from models.utils.VisionTransformer_imagenet import create_vit
 from models.TabularEncoderITM import TabularEncoder
 
-class TIPBackboneEnsemble(nn.Module):
+class BackboneEnsemble(nn.Module):
     """
-    Evaluation model for TIP.
+    Evaluation model.
     """
     def __init__(self, args) -> None:
-        super(TIPBackboneEnsemble, self).__init__()
+        super(BackboneEnsemble, self).__init__()
         self.missing_tabular = args.missing_tabular
-        print(f'Current missing tabular for TIPBackboneEnsemble: {self.missing_tabular}')
+        print(f'Current missing tabular for BackboneEnsemble: {self.missing_tabular}')
         if args.checkpoint:
             print(f'Checkpoint name: {args.checkpoint}')
             # Load weights
@@ -171,7 +171,7 @@ if __name__ == "__main__":
                   'tabular_embedding_dim': 512, 'tabular_transformer_num_layers': 4, 'multimodal_transformer_layers': 2,'embedding_dropout': 0.0, 'drop_rate':0.0,
                     'embedding_dim': 2048, 'input_size': 17, 'encoder_num_layers': 2, 'dropout_rate': 0.0,
                     'multimodal_embedding_dim': 256, 'multimodal_transformer_num_layers': 2})
-  model = TIPBackboneEnsemble(args)
+  model = BackboneEnsemble(args)
   x_i = torch.randn(2, 1, 128, 128, 128)
   x_t = torch.tensor([[4.0, 3.0, 0.0, 2.0, 0.2, -0.1,  -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2, 0.1],
                     [2.0, 1.0, 1.0, 0.0, -0.5, 0.2, -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2,  -0.5, 0.2, 0.1]], dtype=torch.float32)

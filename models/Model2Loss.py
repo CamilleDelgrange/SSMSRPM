@@ -1,6 +1,7 @@
 '''
 * Licensed under the Apache License, Version 2.
-* By Siyi Du, 2024
+* Based on TIP codebase
+
 '''
 
 from typing import List, Tuple, Dict
@@ -14,7 +15,7 @@ from utils.clip_loss import CLIPLoss
 from models.pretraining import Pretraining
 
 
-class TIP2Loss(Pretraining):
+class Model2Loss(Pretraining):
     '''
     Tabular-Imaging Pretraining
     '''

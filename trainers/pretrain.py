@@ -22,12 +22,8 @@ from datasets.ContrastiveImagingAndTabularDatasetCached import ContrastiveImagin
 from models.MultimodalSimCLR import MultimodalSimCLR
 from models.SimCLR import SimCLR
 from models.BarlowTwins3D import Barlow_Twins_Module
-from models.SwAV_Bolt import SwAV
-from models.BYOL_Bolt import BYOL
-from models.SimSiam_Bolt import SimSiam
-from models.BarlowTwins import BarlowTwins
 from models.SCARF import SCARF
-from models.Tips.TipModel2Loss import TIP2Loss
+from models.Model2Loss import Model2Loss
 from monai.data import (
     DataLoader,
     Dataset,
@@ -114,8 +110,8 @@ def select_model(hparams, train_dataset, device=None):
   if hparams.datatype == 'multimodal':
     if hparams.strategy == 'itm':
       # ITM
-      model = TIP2Loss(hparams)
-      print('Using TIP2Loss')
+      model = Model2Loss(hparams)
+      print('Using Model2Loss')
     else:
       # MMCL
       model = MultimodalSimCLR(hparams) 
