@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+  - _self_
+
+model: resnet18
+lr: 3.e-4
+img_size: 128
+embedding_dim: 512
+is_training: False
+is_ssl: True
+original_height: 182
+
+lr_imaging: 3.e-4
+lr_tabular: 3.e-4

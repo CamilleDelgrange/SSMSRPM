@@ -1,0 +1,132 @@
+defaults:
+  - _self_
+  - models: resnet50
+  - dataset: ukb_stroke
+
+# Command Center
+pretrain: False
+run_eval: True
+
+algorithm_name: EVAL_PRETRAIN
+
+seeds: 
+  - 2022
+  - 2023
+  - 2024
+  - 2025
+  - 2026
+lr_finder_lrs: 
+  - 3.e-2
+  - 1.e-2
+  - 3.e-3
+  - 1.e-3
+  - 3.e-4
+  - 1.e-4
+multitarget:
+
+wandb_entity: #PUT HERE YOUR WANDB ENTITY
+data_base: #PUT HERE YOUR DATABASE FOLDER 
+num_workers: 4
+
+wandb_project: #PUT HERE YOUR WANDB PROJECT NAME
+
+# Multimodal
+lr: 1.e-4
+weight_decay: 5.e-3
+scheduler: anneal
+anneal_max_epochs: 200
+warmup_epochs: 10
+temperature: 0.15
+projection_dim: 128
+use_projection_head: True
+strategy: 
+
+loss: clip
+hard_neg: False
+view: augmented
+lambda_0: 0.5
+momentum: 0.99
+
+train_similarity_matrix:
+val_similarity_matrix: 
+threshold: 0.9
+similarity_divisor: 2
+
+tabular_pretrain_checkpoint:
+pretrained_tabular_strategy: frozen
+imaging_pretrain_checkpoint:
+pretrained_imaging_strategy: trainable
+
+multiple_lr: False
+
+batch_size: 6 #512
+lr_eval: 1e-5 #scaled by gradient acc
+weight_decay_eval: 1e-3
+val_check_interval: 1.0 
+check_val_every_n_epoch: 1 
+tabular_embedding_dim: 2048
+
+# Classifier
+classifier_num_layers: 2
+lr_classifier: 3.e-4
+weight_decay_classifier: 1.e-4
+online_mlp: False 
+
+# Imaging
+augmentation_rate: 0.95
+crop_scale_lower: 0.08
+
+# tabular
+corruption_rate: 0.3
+one_hot: True
+eval_one_hot: True
+
+encoder_num_layers: 2
+projector_num_layers: 1
+init_strat: kaiming
+dropout_rate: 0.3
+
+# Evaluator
+generate_embeddings: False
+keep_projector: False
+eval_train_augment_rate: 0.8
+eval_classifier: linear
+finetune_strategy: trainable
+optimizer_eval: adamw
+youden_index: False
+youden_index_eval: True
+gradcam: True
+
+vec2vec: False
+checkpoint_vec2vec: 
+
+# PUT here the pretrained checkpoint of the best pretrained multimodal model:
+checkpoint: PATH_TO_REPO/runs/multimodal/gentle-sound-239/last.ckpt
+checkpoint_imaging: False
+checkpoint_tabular: False
+checkpoint_multimodal: True
+datatype: multimodal
+eval_datatype: imaging_and_tabular
+task: classification
+fig_dir:
+grad_cam_strategy: accumulation
+
+# General
+seed: 2022
+max_epochs: 50
+log_images: False
+use_wandb: True
+limit_train_batches: 1.0
+limit_val_batches: 1.0
+limit_test_batches: 1.0
+enable_progress_bar: True
+log_every_n_steps: 1
+offline: False
+evaluate: True
+test: False
+test_and_eval: True
+combine_train_and_val: False
+weighted_sampler: False
+stratified_sampler: True
+classifier_freq: 1
+unit_test: False

@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+ - _self_
+
+target: stroke
+
+num_classes: 2
+weights: #[0.55, 10] # To check for model evaluation!!
+# For the images, provide a .pt with a list of your images or a list of the paths to your images.
+# For big dataset need to save only paths to load live. If providing a list of paths, set live_loading=True.
+live_loading: True
+delete_segmentation: False
+balanced_accuracy: True
+eval_metric: auc
+
+# num of features
+num_cat: 29
+num_con: 18
+
+field_lengths_tabular: /PATH_TO_YOUR_DOCUMENT/field_lengths_tabular.pt
+
+columns_name: /PATH_TO_YOUR_DOCUMENT/features_columns.txt
+
+data_train_tabular: /PATH_TO_SPLIT_PRETRAINING_TRAIN_SET_FEATURES/features_pretrain_train_all_patients.csv
+data_val_tabular: /PATH_TO_SPLIT_PRETRAINING_VAL_SET_FEATURES/features_pretrain_val_all_patients.csv
+
+data_train_imaging: /PATH_TO_SPLIT_PRETRAINING_TRAIN_SET_IMG_PATHS/image_paths_pretrain_train_all_patients.pt
+data_val_imaging: /PATH_TO_SPLIT_PRETRAINING_VAL_SET_IMG_PATHS/image_paths_pretrain_val_all_patients.pt
+
+
+# For the online classifier during self-supervised pre-training
+labels_train: /PATH_TO_SPLIT_PRETRAINING_TRAIN_SET_LABELS/labels_pretrain_train_all_patients.pt 
+labels_val: /PATH_TO_SPLIT_PRETRAINING_VAL_SET_LABELS/labels_pretrain_val_all_patients.pt 
+
+# For the downstream task, this should be balanced for train, val and test:
+data_train_eval_tabular: /PATH_TO_SPLIT_TRAIN_SET_FEATURES/features_train.csv
+data_train_eval_imaging: /PATH_TO_SPLIT_TRAIN_SET_IMG_PATHS/image_paths_train.pt
+labels_train_eval: /PATH_TO_SPLIT_TRAIN_SET_LABELS/labels_train.pt 
+
+data_val_eval_tabular: /PATH_TO_SPLIT_VAL_SET_FEATURES/features_val.csv
+data_val_eval_imaging: /PATH_TO_SPLIT_VAL_SET_IMG_PATHS/image_paths_val.pt
+labels_val_eval: /PATH_TO_SPLIT_VAL_SET_LABELS/labels_val.pt 
+
+data_test_eval_tabular: /PATH_TO_SPLIT_TEST_SET_FEATURES/features_test.csv
+data_test_eval_imaging: /PATH_TO_SPLIT_TEST_SET_IMG_PATHS/image_paths_test.pt
+labels_test_eval_imaging: /PATH_TO_SPLIT_TEST_SET_LABELSlabels_test.pt 

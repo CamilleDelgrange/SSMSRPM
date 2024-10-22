@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - _self_
+
+model: resnetcustom
+lr: 0.5
+img_size: 128
+z_dim: 2048
+is_training: False
+is_ssl: True
+original_height: 182
+
+# ResNet:
+in_channels: 1
+n_blocks: 6
+bn_momentum: 0.05
+n_basefilters: 16
+dropout_rate: 0.1
+resnet_version: 'base' 
+remain_downsample_steps: null
