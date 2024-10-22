@@ -124,7 +124,7 @@ def exception(self):
     self._exception = self._pconn.recv()
   return self._exception
 
-@hydra.main(config_path='./configs', config_name='config_pretraining_MMCL_hardNeg', version_base=None) #config_pretraining_TIP
+@hydra.main(config_path='./configs', config_name='config_pretraining', version_base=None)
 def control(args: DictConfig):
   #print("Arguments received in the 'control' function:")
   #print(args)

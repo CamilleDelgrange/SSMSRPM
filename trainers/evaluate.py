@@ -1,3 +1,9 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on MMCL codebase https://github.com/paulhager/MMCL-Tabular-Imaging/blob/main/trainers/evaluate.py
+'''
+
 import os 
 import torch
 import time

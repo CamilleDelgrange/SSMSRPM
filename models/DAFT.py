@@ -1,3 +1,10 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/Tip_utils/Tip_pretraining.py
+* Based on DAFT codebase https://github.com/ai-med/DAFT/tree/master/daft/networks
+'''
+
 from typing import Dict, Tuple
 import torch
 import torch.nn as nn

@@ -1,3 +1,9 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on MMCL codebase https://github.com/paulhager/MMCL-Tabular-Imaging/blob/main/trainers/pretrain.py
+'''
+
 import os 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128" #garbage_collection_threshold:0.6,
 import sys

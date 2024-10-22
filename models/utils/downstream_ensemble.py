@@ -1,6 +1,7 @@
 '''
 * Licensed under the Apache License, Version 2.
-* By Siyi Du, 2024
+* By Camille Delgrange, 2024
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/Tip_utils/Tip_downstream_ensemble.py
 '''
 
 import sys
@@ -19,7 +20,6 @@ from monai.networks import nets
 
 from models.utils.Transformer import MultimodalTransformerEncoder
 from utils.pieces import DotDict
-#from models.utils.VisionTransformer_imagenet import create_vit
 from models.TabularEncoderITM import TabularEncoder
 
 class BackboneEnsemble(nn.Module):
@@ -61,9 +61,6 @@ class BackboneEnsemble(nn.Module):
                 encoder_name_dict = {'clip' : 'encoder_imaging.', 'remove_fn' : 'encoder_imaging.', 'supcon' : 'encoder_imaging.', 'byol': 'online_network.encoder.', 'simsiam': 'online_network.encoder.', 'swav': 'model.', 'barlowtwins': 'network.encoder.'}
                 self.encoder_name_imaging = encoder_name_dict[original_args.loss]
 
-            #if original_args.model.startswith('vit'):
-                #self.encoder_imaging = create_vit(original_args)
-                #self.encoder_imaging_type = 'vit'
             if original_args.model.startswith('resnet'):
                 model = nets.resnet50(spatial_dims=3, n_input_channels=1)
                 self.encoder_imaging = nn.Sequential(*list(model.children())[:-2]) # remove classifier layer + adaptive pool avg
@@ -105,9 +102,6 @@ class BackboneEnsemble(nn.Module):
         self.classifier_tabular = nn.Linear(self.tab_dim, args.num_classes)
 
     def create_imaging_model(self, args):
-        #if args.model.startswith('vit'):
-            #self.encoder_imaging = create_vit(args)
-            #self.encoder_imaging_type = 'vit'
         if args.model.startswith('resnet'):
             model = nets.resnet50(spatial_dims=3, n_input_channels=1)
             self.encoder_imaging = nn.Sequential(*list(model.children())[:-2]) # remove classifier layer + adaptive pool avg
@@ -151,9 +145,6 @@ class BackboneEnsemble(nn.Module):
 
         if self.encoder_imaging_type == 'resnet':
             out_i = self.classifier_imaging(x_i)
-        elif self.encoder_imaging_type == 'vit':
-            out_i = self.classifier_imaging(x_i[:,0,:])
-        #out_t = self.classifier_tabular(x_t[:,0,:])
         out_t = self.classifier_tabular(x_t)
         out_m = self.classifier_multimodal(x_m[:,0,:])
         x = (out_i+out_t+out_m)/3.0

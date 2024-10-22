@@ -1,3 +1,10 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on MMCL codebase https://github.com/paulhager/MMCL-Tabular-Imaging/blob/main/utils/clip_loss.py
+'''
+
+
 from typing import Tuple, List
 
 import torch

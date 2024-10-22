@@ -1,3 +1,9 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on MMCL codebase https://github.com/paulhager/MMCL-Tabular-Imaging/blob/main/models/Evaluator.py
+'''
+
 import sys
 import os 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))

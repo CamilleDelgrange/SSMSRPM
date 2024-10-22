@@ -1,3 +1,8 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/MultimodalModelTransformer.py
+'''
 
 import torch
 import torch.nn as nn

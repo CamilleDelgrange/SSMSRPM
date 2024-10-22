@@ -1,7 +1,7 @@
 '''
 * Licensed under the Apache License, Version 2.
-* By Siyi Du, 2024
-* Based on TIP codebase 
+* By Camille Delgrange, 2024
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/Tip_utils/Tip_pretraining.py
 * Based on MMCL codebase https://github.com/paulhager/MMCL-Tabular-Imaging/blob/main/models/pretraining.py
 '''
 from typing import List, Tuple, Dict, Any
@@ -24,7 +24,6 @@ REPO_PATH = os.path.abspath(os.path.join(CURRENT_PATH, '..'))
 sys.path.append(REPO_PATH)
 
 from models.utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
-#from models.utils.VisionTransformer_imagenet import create_vit
 
 class Pretraining(pl.LightningModule):
     
@@ -56,10 +55,6 @@ class Pretraining(pl.LightningModule):
     """
     Selects appropriate resnet encoder
     """
-    #if self.hparams.model.startswith('vit'):
-      #self.encoder_imaging_type = 'vit'
-      #self.encoder_imaging =  create_vit(self.hparams)
-      #self.pooled_dim = self.hparams.embedding_dim
     if self.hparams.model.startswith('resnet'):
       self.encoder_imaging_type = 'resnet'
       model = self.monai_3d_ssl_encoder(self.hparams.model)
@@ -95,14 +90,9 @@ class Pretraining(pl.LightningModule):
     self.top1_acc_train = torchmetrics.Accuracy(task='multiclass', top_k=1, num_classes=nclasses_train)
     self.top1_acc_val = torchmetrics.Accuracy(task='multiclass', top_k=1, num_classes=nclasses_val)
 
-    self.top5_acc_train = torchmetrics.Accuracy(task='multiclass', top_k=5, num_classes=nclasses_train)
-    self.top5_acc_val = torchmetrics.Accuracy(task='multiclass', top_k=5, num_classes=nclasses_val)
-
     n_classes_cat = self.encoder_tabular.num_unique_cat
     self.top1_acc_train_cat = torchmetrics.Accuracy(task='multiclass', top_k=1, num_classes=n_classes_cat)
-    self.top5_acc_train_cat = torchmetrics.Accuracy(task='multiclass', top_k=5, num_classes=n_classes_cat)
     self.top1_acc_val_cat = torchmetrics.Accuracy(task='multiclass', top_k=1, num_classes=n_classes_cat)
-    self.top5_acc_val_cat = torchmetrics.Accuracy(task='multiclass', top_k=5, num_classes=n_classes_cat)
     self.auc_train_cat = torchmetrics.AUROC(task='multiclass', num_classes=n_classes_cat)
     self.auc_val_cal = torchmetrics.AUROC(task='multiclass', num_classes=n_classes_cat)
 
@@ -150,13 +140,10 @@ class Pretraining(pl.LightningModule):
     """
     Generates projection and encoding of imaging data.
     """
-    y = self.encoder_imaging(x) #[-1]
+    y = self.encoder_imaging(x)
     if self.encoder_imaging_type == 'resnet':
       z = F.adaptive_avg_pool3d(y, (1, 1, 1)).flatten(1)
-      #y = y.view(y.size(0), -1)  # Flatten the output tensor
-    elif self.encoder_imaging_type == 'vit':
-      z = y[:,0,:]
-    z = self.projector_imaging(z) # or of y ?
+    z = self.projector_imaging(z)
     return z, y
 
   def forward_tabular(self, x: torch.Tensor, mask: torch.Tensor=None, mask_special: torch.Tensor=None) -> torch.Tensor:
@@ -187,35 +174,27 @@ class Pretraining(pl.LightningModule):
 
   def calc_and_log_train_embedding_acc(self, logits, labels, modality: str) -> None:
     self.top1_acc_train(logits, labels)
-    self.top5_acc_train(logits, labels)
     
     self.log(f"{modality}.train.top1", self.top1_acc_train, on_epoch=True, on_step=False)
-    self.log(f"{modality}.train.top5", self.top5_acc_train, on_epoch=True, on_step=False)
 
   def calc_and_log_val_embedding_acc(self, logits, labels, modality: str) -> None:
     self.top1_acc_val(logits, labels)
-    self.top5_acc_val(logits, labels)
     
     self.log(f"{modality}.val.top1", self.top1_acc_val, on_epoch=True, on_step=False)
-    self.log(f"{modality}.val.top5", self.top5_acc_val, on_epoch=True, on_step=False)
   
   def calc_and_log_train_cat_embedding_acc(self, logits, labels, mask, modality: str) -> None:
     logits, labels = logits[mask].detach(), labels[mask].detach()
     # print(logits.shape, labels.shape)
     self.top1_acc_train_cat(logits, labels)
-    self.top5_acc_train_cat(logits, labels)
     self.auc_train_cat(logits, labels)
     self.log(f"{modality}.train.categorical.top1", self.top1_acc_train_cat, on_epoch=True, on_step=False)
-    self.log(f"{modality}.train.categorical.top5", self.top5_acc_train_cat, on_epoch=True, on_step=False)
     self.log(f"{modality}.train.categorical.auc", self.auc_train_cat, on_epoch=True, on_step=False)
 
   def calc_and_log_val_cat_embedding_acc(self, logits, labels, mask, modality: str) -> None:
     logits, labels = logits[mask].detach(), labels[mask].detach()
     self.top1_acc_val_cat(logits, labels)
-    self.top5_acc_val_cat(logits, labels)
     self.auc_val_cal(logits, labels)
     self.log(f"{modality}.val.categorical.top1", self.top1_acc_val_cat, on_epoch=True, on_step=False)
-    self.log(f"{modality}.val.categorical.top5", self.top5_acc_val_cat, on_epoch=True, on_step=False)
     self.log(f"{modality}.val.categorical.auc", self.auc_val_cal, on_epoch=True, on_step=False)
   
   def calc_and_log_train_itm_acc(self, logits, labels, modality: str) -> None:

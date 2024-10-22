@@ -1,7 +1,7 @@
 '''
 * Licensed under the Apache License, Version 2.
-* Based on TIP codebase
-
+* By Camille Delgrange, 2024
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/Tips/TipModel3Loss.py
 '''
 
 from typing import List, Tuple, Dict

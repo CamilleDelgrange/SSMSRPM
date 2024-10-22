@@ -1,3 +1,8 @@
+'''
+* Licensed under the Apache License, Version 2.
+* Based on TIP codebase https://github.com/siyi-wind/TIP/blob/main/models/Tip_utils/pieces.py
+'''
+
 import collections
 
 

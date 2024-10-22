@@ -1,3 +1,8 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+'''
+
 import torch
 import torch.nn as nn
 from lightly.models.modules import SimCLRProjectionHead

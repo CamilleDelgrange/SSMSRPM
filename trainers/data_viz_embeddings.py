@@ -1,3 +1,8 @@
+'''
+* Licensed under the Apache License, Version 2.
+* By Camille Delgrange, 2024
+'''
+
 """
 UMAP Visualization for Unimodal and Cross-modal Embeddings
 

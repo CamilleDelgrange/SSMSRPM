@@ -5,6 +5,7 @@
 * Based on AViT https://github.com/siyi-wind/AViT/blob/main/Models/Transformer/ViT_adapters.py
 * Based on BLIP https://github.com/salesforce/BLIP/blob/main/models/med.py
 '''
+
 from typing import Dict, List
 from collections import OrderedDict
 from timm.models.layers import DropPath, trunc_normal_
@@ -205,7 +206,6 @@ class TabularTransformerEncoder(nn.Module):
         self.num_con = len(con_lengths_tabular)
         self.num_unique_cat= sum(cat_lengths_tabular)
         print('TabularTransformerEncoder uses Mask Attention')
-        # print('TabularTransformerEncoder No Mask Attention')
 
         # categorical embedding
         cat_offsets = torch.tensor([0] + cat_lengths_tabular[:-1]).cumsum(0)
