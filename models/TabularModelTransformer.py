@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 from collections import OrderedDict
 
-from models.Tip_utils.Transformer import TabularTransformerEncoder
+from models.utils.Transformer import TabularTransformerEncoder
 
 class TabularModelTransformer(nn.Module):
     """

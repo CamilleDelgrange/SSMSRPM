@@ -15,7 +15,7 @@ from sklearn.linear_model import LogisticRegression
 from lightly.models.modules import SimCLRProjectionHead
 from models.ResnetEmbeddingModel import ProjectionHead
 from pl_bolts.optimizers.lr_scheduler import LinearWarmupCosineAnnealingLR
-from models.Tip_utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
+from models.utils.Transformer import TabularTransformerEncoder, MultimodalTransformerEncoder, TabularPredictor
 from pl_bolts.utils.self_supervised import torchvision_ssl_encoder
 from monai.networks import nets
 from torch import nn
