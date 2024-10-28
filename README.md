@@ -5,7 +5,14 @@ GitHub repository for the code of the project and paper "A Self-Supervised Model
 Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction](link), if this code was helpful.
 
 ```
-#put paper citation
+@inproceedings{
+delgrange2024a,
+title={A Self-Supervised Model for Multi-modal Stroke Risk Prediction},
+author={Camille Delgrange and Olga V. Demler and Samia Mora and bjoern menze and Ezequiel De la Rosa and Neda Davoudi},
+booktitle={Advancements In Medical Foundation Models: Explainability, Robustness, Security, and Beyond},
+year={2024},
+url={https://openreview.net/forum?id=ST72dbOvwx}
+}
 ```
 
 If you want an overview of the paper, checkout:
