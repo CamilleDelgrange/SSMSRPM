@@ -54,6 +54,6 @@ Paths to your data is set through the `data_base` argument and then joined with 
 The UKBB data is semi-private. You can apply for access [here](https://www.ukbiobank.ac.uk/enable-your-research/apply-for-access).
 You must therefore provide tabular features pre-processed for missing variables and standardized, as well as T2-FLAIR anatomical brain MRI scans that are defaced, anonymized and deskulled, according to the UKB's general pre-processing pipeline [UKB pipeline](https://www.fmrib.ox.ac.uk/ukbiobank/fbp/). 
 
-### Acknoledgments:
+### Acknowledgments:
 
 We thank the public repositories of [TIP](https://github.com/siyi-wind/TIP/tree/main) and [MMCL](https://github.com/paulhager/MMCL-Tabular-Imaging/tree/65070559e0a59944c4c78c667fc6372e8828520e), that helped us build this project and adapt our code for 3D multimodal data and our clinical interpretation of the task. 
