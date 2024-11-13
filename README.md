@@ -15,17 +15,18 @@ url={https://openreview.net/forum?id=ST72dbOvwx}
 }
 ```
 
-![Alt Text]()
+![Alt Text](Diagram_paper.png)
 
 ## Instructions
 
 Run the following commands to install and activate the environment. Then install any needed additional packages.
 
-`conda env create --file environment.yaml
+```
+conda env create --file environment.yaml
 conda activate selfsuper
 pip install torch-geometric
 pip install --no-index torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
-`
+```
 
 To run, execute `python run.py`.
 
