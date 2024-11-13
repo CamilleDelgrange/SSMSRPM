@@ -16,7 +16,7 @@ url={https://openreview.net/forum?id=ST72dbOvwx}
 }
 ```
 
-![Alt Text](Diagram_paper.pdf)
+![Alt Text](Diagram_paper.png)
 
 ## Instructions
 
