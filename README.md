@@ -15,14 +15,17 @@ url={https://openreview.net/forum?id=ST72dbOvwx}
 }
 ```
 
-If you want an overview of the paper, checkout:
-- [graphical abstract?]
-- 
-
+![Alt Text]()
 
 ## Instructions
 
-Install environment using `conda env create --file environment.yaml`. 
+Run the following commands to install and activate the environment. Then install any needed additional packages.
+
+`conda env create --file environment.yaml
+conda activate selfsuper
+pip install torch-geometric
+pip install --no-index torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
+`
 
 To run, execute `python run.py`.
 
@@ -42,12 +45,13 @@ For reference to typical arguments, see the default config files for pretraining
 
 Code is integrated with weights and biases, so set `wandb_project` and `wandb_entity` in [config_pretraining.yaml](configs/config_pretraining.yaml).
 
-Paths to your data is set through the `data_base` argument and then joined with filenames set in the dataset yamls. Therefore, you have to modify the config file in : SSMSRPM\configs\dataset\ukb_stroke.yaml to your own paths containing the data.
+Paths to your data is set through the `data_base` argument and then joined with filenames set in the dataset yaml files. Therefore, you have to modify the config file in : SSMSRPM/configs/dataset/[dataset].yaml to your own paths containing the data.
 
-- For the images, a list of the paths to your images in .pt format.
+- For the images, provide a list of the paths to your images in .pt format. The images can be 3D anatomical MRI volumes or segmented lesion masks available from the UK Biobank pre-processing pipeline depending on the strategy. 
 - If `stratified_sampler` is set, during finetuning a stratified sampler will be used to balance the training batches.
 - `eval_metric` supports `auc`, `bAcc`, `F1` and `Recall` (sensitivity).
-- If doing multimodal pretraining or tabular pretraining (SCARF), the tabular data should be provided as *NOT* one-hot encoded so the sampling from the empirical marginal distribution works correctly. You must provide a file `field_lengths_tabular` which is an array that in the order of your tabular columns specifies how many options there are for that field. Continuous fields should thus be set to 1 (i.e. no one-hot encoding necessary), while categorical fields should specify how many columns should be created for the one_hot encoding  
+- For tabular data and labels, files are in .csv format.
+- If doing multimodal pretraining or tabular pretraining (SCARF), the tabular data should be provided as *NOT* one-hot encoded so the sampling from the empirical marginal distribution works correctly. You must provide a file `field_lengths_tabular` which is an array that in the order of your tabular columns specifies how many options there are for that field. Continuous fields should thus be set to 1 (i.e. no one-hot encoding necessary), while categorical fields should specify how many columns should be created for the one_hot encoding.
 
 ### Data
 
