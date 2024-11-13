@@ -1,5 +1,6 @@
 # SSMSRPM
 GitHub repository for the code of the project and paper "A Self-Supervised Model for Multi-modal Stroke Risk Prediction". 
+
 # A Self-Supervised Multi-modal Stroke Risk Prediction Model
 
 Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction](link), if this code was helpful.
@@ -15,7 +16,7 @@ url={https://openreview.net/forum?id=ST72dbOvwx}
 }
 ```
 
-![Alt Text](Diagram_paper.png)
+![Alt Text](Diagram_paper.pdf)
 
 ## Instructions
 
