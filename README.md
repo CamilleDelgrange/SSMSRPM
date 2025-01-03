@@ -3,7 +3,7 @@ GitHub repository for the code of the project and paper "A Self-Supervised Model
 
 # A Self-Supervised Multi-modal Stroke Risk Prediction Model
 
-Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction]([link](https://arxiv.org/abs/2411.09822)), if this code was helpful.
+Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction]([https://arxiv.org/abs/2411.09822]), if this code was helpful.
 
 ```
 @inproceedings{
@@ -59,7 +59,7 @@ Paths to your data is set through the `data_base` argument and then joined with 
 
 You can download our best model's weights in `.pth` format from the following Google Drive link:
 
-[Download Best Model Weights](https://drive.google.com/file/d/1_XIFjztzUBEPOnnM45Gpl69_-Lw4Kb5P/view?usp=sharing)
+[Download Best Model's Weights](https://drive.google.com/file/d/1_XIFjztzUBEPOnnM45Gpl69_-Lw4Kb5P/view?usp=sharing)
 
 
 ### Data
