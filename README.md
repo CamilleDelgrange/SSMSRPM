@@ -3,7 +3,7 @@ GitHub repository for the code of the project and paper "A Self-Supervised Model
 
 # A Self-Supervised Multi-modal Stroke Risk Prediction Model
 
-Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction](link), if this code was helpful.
+Please cite our NeurIPS paper, [A Self-Supervised Model for Multi-modal Stroke Risk Prediction]([link](https://arxiv.org/abs/2411.09822)), if this code was helpful.
 
 ```
 @inproceedings{
@@ -54,6 +54,13 @@ Paths to your data is set through the `data_base` argument and then joined with 
 - `eval_metric` supports `auc`, `bAcc`, `F1` and `Recall` (sensitivity).
 - For tabular data and labels, files are in .csv format.
 - If doing multimodal pretraining or tabular pretraining (SCARF), the tabular data should be provided as *NOT* one-hot encoded so the sampling from the empirical marginal distribution works correctly. You must provide a file `field_lengths_tabular` which is an array that in the order of your tabular columns specifies how many options there are for that field. Continuous fields should thus be set to 1 (i.e. no one-hot encoding necessary), while categorical fields should specify how many columns should be created for the one_hot encoding.
+
+## Model Weights
+
+You can download our best model's weights in `.pth` format from the following Google Drive link:
+
+[Download Best Model Weights](https://drive.google.com/file/d/1_XIFjztzUBEPOnnM45Gpl69_-Lw4Kb5P/view?usp=sharing)
+
 
 ### Data
 
